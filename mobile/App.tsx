@@ -1,7 +1,7 @@
-import { StatusBar, Text } from 'react-native';
-
+import { StatusBar } from 'react-native';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 
+import { Home } from './src/screens/Home';
 import { Loading } from './src/components/Loading';
 
 export default function App() {
@@ -20,10 +20,8 @@ export default function App() {
 
   return (
     <>
-      <Text style={{ fontFamily: 'Inter_800ExtraBold' }}>
-        Hello World
-      </Text>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" />
+      <Home />
+      <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
     </>
   );
 }
