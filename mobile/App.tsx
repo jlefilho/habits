@@ -1,4 +1,5 @@
 import { StatusBar } from 'react-native';
+import './src/lib/dayjs'
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 
 import { Home } from './src/screens/Home';
