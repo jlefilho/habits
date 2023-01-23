@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, ScrollView } from "react-native";
 
 import { HabitDayBlock, habitDayBlockSize } from "../components/HabitDayBlock";
@@ -10,6 +11,7 @@ const minDayBlocks = 18 * 7 //18 weeks * 7 days
 const amountOfDaysToFill = minDayBlocks - datesFromYearStart.length
 
 export function Home() {
+    const { navigate } = useNavigation()
     return (
         <View className="flex-1 bg-background px-8 pt-16">
             <Header />
@@ -39,6 +41,7 @@ export function Home() {
                         datesFromYearStart.map(date => (
                             <HabitDayBlock
                                 key={date.toISOString()}
+                                onPress={() => navigate('habitDetails', { date: date.toISOString() })}
                             />
                         ))
                     }
