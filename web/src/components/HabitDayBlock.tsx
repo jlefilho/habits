@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import * as Popover from '@radix-ui/react-popover'
 
 import dayjs from 'dayjs'
@@ -8,15 +9,21 @@ import { HabitsList } from './HabitsList'
 
 interface HabitDayBlockProps {
     date: Date
-    completed?: number
+    defaultCompleted?: number
     amount?: number
 }
 
-export function HabitDayBlock({ amount = 0, completed = 0, date}: HabitDayBlockProps) {
-    const completedPercentage = amount > 0 ? Math.round((completed / amount) * 100) : 0
+export function HabitDayBlock({ amount = 0, defaultCompleted = 0, date}: HabitDayBlockProps) {
+    const [completedHabits, setCompletedHabits] = useState(defaultCompleted)
+
+    const completedPercentage = amount > 0 ? Math.round((completedHabits / amount) * 100) : 0
 
     const dayAndMonth = dayjs(date).format('DD/MM')
     const dayOfWeek = dayjs(date).format('dddd')
+
+    function handleCompletedHabitsChange(completed: number) {
+        setCompletedHabits(completed)
+    }
 
     return (
         <Popover.Root>
@@ -39,7 +46,7 @@ export function HabitDayBlock({ amount = 0, completed = 0, date}: HabitDayBlockP
 
                     <ProgressBar progress={completedPercentage}/>
 
-                    <HabitsList date={date} />
+                    <HabitsList date={date} onCompletedChange={handleCompletedHabitsChange} />
 
                     <Popover.Arrow height={8} width={16} className="fill-zinc-900" />
                 </Popover.Content>
