@@ -64,10 +64,18 @@ export function HabitDetails() {
     }
 
     async function handleToggleHabit(habitId: string) {
-        if (completedHabits.includes(habitId)) {
-            setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId))
-        } else {
-            setCompletedHabits(prevState => [...prevState, habitId])
+        try {
+            await api.patch(`/habits/${habitId}/toggle`)
+
+            if (completedHabits.includes(habitId)) {
+                setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId))
+            } else {
+                setCompletedHabits(prevState => [...prevState, habitId])
+            }
+
+        } catch (e) {
+            console.log(e)
+            Alert.alert('Ops!', 'Não foi possível atualizar o status do hábito.')
         }
     }
 
